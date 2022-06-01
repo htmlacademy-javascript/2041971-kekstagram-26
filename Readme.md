@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Лариса Зубкова](https://up.htmlacademy.ru/javascript/26/user/2041971).
-* Наставник: `Неизвестно`.
+- Студент: [Лариса Зубкова](https://up.htmlacademy.ru/javascript/26/user/2041971).
+- Наставник: [Alex Elkin](https://htmlacademy.ru/profile/alex_elkin).
 
 ---
 
