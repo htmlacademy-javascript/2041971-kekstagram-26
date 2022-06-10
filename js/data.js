@@ -27,9 +27,11 @@ const NAMES = [
   'Андрей',
 ];
 const IDLIST = Array.from({length:25}, (v,k)=> ++k).sort();
+const COMMENDIDLIST = Array.from({length:40}, (v,k)=> ++k).sort();
+
 
 const createComment = () => ({
-  id: IDLIST.shift()*17, // вот здесь мне не нравится, хотелось бы обсудить на конс
+  id: COMMENDIDLIST.shift(),
   avatar: `img/avatar-${getRandomeInInclusie(1,6)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
@@ -48,4 +50,4 @@ const createDescription = () => {
 };
 
 const getMockPhotos = Array.from({length:25}, createDescription);
-window.console.log(getMockPhotos);
+export {getMockPhotos};
