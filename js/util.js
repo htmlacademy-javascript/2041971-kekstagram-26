@@ -11,6 +11,7 @@ const checkMaxStrLength = (str, maxLenght) => typeof str !== 'string' ? new Erro
 checkMaxStrLength('larisa', 10);
 
 const getRandomArrayElement = (elements) => elements[getRandomeInInclusie(0, elements.length - 1)];
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
-export {getRandomeInInclusie, getRandomArrayElement};
+export {getRandomeInInclusie, getRandomArrayElement, isEscapeKey};
 

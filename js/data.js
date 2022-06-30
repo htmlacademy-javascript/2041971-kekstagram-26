@@ -44,10 +44,10 @@ const createDescription = () => {
     url: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomeInInclusie(15,200),
-    comments: [createComment(), createComment()],
+    comments: Array.from({length: getRandomeInInclusie(1,4)}, createComment),
   };
   return description;
 };
 
-const getMockPhotos = Array.from({length:25}, createDescription);
-export {getMockPhotos};
+const mockPhotos = Array.from({length:25}, createDescription);
+export {mockPhotos};

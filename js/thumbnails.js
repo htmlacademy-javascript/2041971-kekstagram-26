@@ -1,4 +1,4 @@
-import { getMockPhotos } from './data.js';
+import { mockPhotos } from './data.js';
 
 const similarListElement = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture')
@@ -7,13 +7,16 @@ const pictureTemplate = document.querySelector('#picture')
 
 const pictureFragment = document.createDocumentFragment();
 
-getMockPhotos.forEach(({likes, comments, url}) => {
+mockPhotos.forEach(({likes, comments, url,id}) => {
   const pictureElement = pictureTemplate.cloneNode(true);
 
   pictureElement.querySelector('.picture__likes').textContent = likes;
   pictureElement.querySelector('.picture__comments').textContent = comments.length;
   pictureElement.querySelector('.picture__img').src = url;
+  pictureElement.setAttribute('id', id);
   pictureFragment.appendChild(pictureElement);
 });
 
 similarListElement.appendChild(pictureFragment);
+
+
