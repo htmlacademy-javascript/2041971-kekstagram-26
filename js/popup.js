@@ -8,9 +8,7 @@ const commentsLoader = bigPicture.querySelector('.comments-loader');
 const bigPictureCansel = bigPicture.querySelector('.big-picture__cancel');
 const pictureContainer = document.querySelector('.pictures');
 
-const onPopupClickOff = () => bigPictureCansel.addEventListener('click', () => {
-  closeBigPicture();
-});
+const onPopupClickOff = () => bigPictureCansel.addEventListener('click', closeBigPicture());
 
 const onPopupEscKeydown = () => document.addEventListener('keydown', (evt) => {
   if(isEscapeKey(evt)){
@@ -45,7 +43,6 @@ const rendersBigPicture = ({url, likes, comments, description}) => {
 const openBigPicture = (evt)=>{
   const picture = evt.target.closest('.picture');
   const data = mockPhotos.find((photo) => +photo.id === +picture.dataset.id);
-  console.log(data);
   rendersBigPicture(data);
  
   bigPicture.classList.remove('hidden');
