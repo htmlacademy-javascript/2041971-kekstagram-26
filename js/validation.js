@@ -5,9 +5,10 @@ const textHashtags = form.querySelector('.text__hashtags');
 const pristine = new window.Pristine (form, {
   classTo: 'img-upload__field-wrapper',
   errorTextParent: 'img-upload__field-wrapper',
+  errorTextClass: 'img-upload__error-text'
 });
 
-const getArrayHashtags = (value) => (value.trim().toLowerCase().split(''));
+const getArrayHashtags = (value) => (value.trim().toLowerCase().split(' '));
 
 const validateHeshtags = (value) => {
   const hashtegsElements = getArrayHashtags(value);

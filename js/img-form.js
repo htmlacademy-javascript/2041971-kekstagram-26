@@ -9,19 +9,18 @@ const uploadImgForm = () => {
   const hashtagsInput = document.querySelector('.text__hashtags');
   const commentTextarea = document.querySelector('.text__description');
 
-  const onUploadFileClickOff = () => canselButton.addEventListener('click', closeUploadFile());
-  const onUploadFileCKeydown = () => document.addEventListener('keydown', (evt) => {
-    if (isEscapeKey) {
+  const onUploadFileCKeydown = (evt) => {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
       closeUploadFile();
     }
-  });
+  };
 
   const uploadFile = () => {
     imgUpload.classList.remove('hidden');
     body.classList.add('modal-open');
     document.addEventListener('keydown', onUploadFileCKeydown);
-    canselButton.addEventListener('click', onUploadFileClickOff);
+    canselButton.addEventListener('click', closeUploadFile);
   };
 
   imgFile.addEventListener('change', uploadFile);
@@ -30,7 +29,7 @@ const uploadImgForm = () => {
     imgUpload.classList.add('hidden');
     body.classList.remove('modal-open');
     document.removeEventListener('keydown', onUploadFileCKeydown);
-    canselButton.removeEventListener('click', onUploadFileClickOff);
+    canselButton.removeEventListener('click', closeUploadFile);
     imgFile.value = '';
   }
 
