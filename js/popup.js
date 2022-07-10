@@ -8,16 +8,12 @@ const initialPopup = () => {
   const bigPictureCansel = bigPicture.querySelector('.big-picture__cancel');
   const pictureContainer = document.querySelector('.pictures');
 
-  const onPopupClickOff = () => bigPictureCansel.addEventListener('click', () => {
-    closeBigPicture();
-  });
-
-  const onPopupEscKeydown = () => document.addEventListener('keydown', (evt) => {
+  const onPopupEscKeydown = (evt) => {
     if(isEscapeKey(evt)){
       evt.preventDefault();
       closeBigPicture();
     }
-  });
+  };
 
   const rendersBigPicture = ({url, likes, comments, description}) => {
 
@@ -44,17 +40,18 @@ const initialPopup = () => {
 
   const openBigPicture = (evt)=>{
     const picture = evt.target.closest('.picture');
-    const data = mockPhotos.find((photo) => +photo.id === +picture.dataset.id);
-    console.log(data);
-    rendersBigPicture(data);
+    if(picture){
+      const data = mockPhotos.find((photo) => +photo.id === +picture.dataset.id);
+      rendersBigPicture(data);
 
-    bigPicture.classList.remove('hidden');
-    socialCommentCount.classList.add('hidden');
-    commentsLoader.classList.add('hidden');
-    document.querySelector('body').classList.add('modal-open');
+      bigPicture.classList.remove('hidden');
+      socialCommentCount.classList.add('hidden');
+      commentsLoader.classList.add('hidden');
+      document.querySelector('body').classList.add('modal-open');
 
-    document.addEventListener('keydown', onPopupEscKeydown);
-    bigPictureCansel.addEventListener('click', onPopupClickOff);
+      document.addEventListener('keydown', onPopupEscKeydown);
+      bigPictureCansel.addEventListener('click', closeBigPicture);
+    }
   };
 
   pictureContainer.addEventListener('click', openBigPicture);
@@ -63,7 +60,7 @@ const initialPopup = () => {
     bigPicture.classList.add('hidden');
     document.querySelector('body').classList.remove('modal-open');
     document.removeEventListener('keydown', onPopupEscKeydown);
-    bigPictureCansel.removeEventListener('click', onPopupClickOff);
+    bigPictureCansel.removeEventListener('click', closeBigPicture);
   }
 };
 export {initialPopup};
