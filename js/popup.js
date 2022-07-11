@@ -40,10 +40,11 @@ const initialPopup = () => {
 
   const openBigPicture = (evt)=>{
     const picture = evt.target.closest('.picture');
+    const buttonLoadComments = document.querySelector('.comments-loader');
+    const commentCount = document.querySelector('.social__comment-count');
     if(picture){
       const data = mockPhotos.find((photo) => +photo.id === +picture.dataset.id);
       rendersBigPicture(data);
-
       bigPicture.classList.remove('hidden');
       socialCommentCount.classList.add('hidden');
       commentsLoader.classList.add('hidden');
@@ -51,8 +52,17 @@ const initialPopup = () => {
 
       document.addEventListener('keydown', onPopupEscKeydown);
       bigPictureCansel.addEventListener('click', closeBigPicture);
+
+      if(data.comments.length > 5 ){
+        buttonLoadComments.classList.remove('hidden');
+        commentCount.classList.remove('hidden');
+        buttonLoadComments.addEventListener('click', loadMoreComments);
+      }
     }
   };
+  function loadMoreComments(comments){
+    comments.splice(0,5);
+  }
 
   pictureContainer.addEventListener('click', openBigPicture);
 
@@ -63,4 +73,5 @@ const initialPopup = () => {
     bigPictureCansel.removeEventListener('click', closeBigPicture);
   }
 };
+
 export {initialPopup};
