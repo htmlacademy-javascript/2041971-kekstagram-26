@@ -41,26 +41,27 @@ const initialPopup = () => {
     showComments(comments);
   };
 
-  const onButtonLoadShowComments = (dataComment) => {
-    if(dataComment.length <= 5) {
-      commentsLoader.classList.add('hidden');
-    }
-
-    showComments(dataComment.splice(0,5));
-  }
-
-
   const showCommentsCopy = (comments) =>{
+    window.console.log(comments.length);
     const copyComments = comments.slice();
+
+    const onButtonLoadShowComments = () => {
+      if(copyComments.length <= 5) {
+        commentsLoader.classList.add('hidden');
+      }
+      window.console.log(copyComments.length);
+      showComments(copyComments.splice(0,5));
+    };
+
     if (copyComments.length<=5){
       commentsLoader.classList.add('hidden');
       showComments(copyComments);
-    }else {
+    } else {
       commentsLoader.classList.remove('hidden');
       socialCommentCount.classList.remove('hidden');
       showComments(copyComments.splice(0,5));
 
-      commentsLoader.addEventListener ('click', () => onButtonLoadShowComments(copyComments));
+      commentsLoader.addEventListener ('click', onButtonLoadShowComments);
     }
   };
 
@@ -87,7 +88,7 @@ const initialPopup = () => {
     document.querySelector('body').classList.remove('modal-open');
     document.removeEventListener('keydown', onPopupEscKeydown);
     bigPictureCansel.removeEventListener('click', closeBigPicture);
-    commentsLoader.removeEventListener('click', onButtonLoadShowComments);
+    //commentsLoader.removeEventListener('click', onButtonLoadShowComments);
   }
 };
 
