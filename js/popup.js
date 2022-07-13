@@ -7,7 +7,7 @@ const initialPopup = () => {
   const commentsLoader = bigPicture.querySelector('.comments-loader');
   const bigPictureCansel = bigPicture.querySelector('.big-picture__cancel');
   const pictureContainer = document.querySelector('.pictures');
-  const buttonLoadComments = document.querySelector('.comments-loader');
+  const commentItem = bigPicture.querySelector('.social__comment');
 
   const onPopupEscKeydown = (evt) => {
     if(isEscapeKey(evt)){
@@ -17,13 +17,11 @@ const initialPopup = () => {
   };
   const showComments = (comment) => {
     const socialComments = bigPicture.querySelector('.social__comments');
-    const commentItem = bigPicture.querySelector('.social__comment');
     const commentFragment = document.createDocumentFragment();
     socialComments.innerHTML = '';
 
     comment.forEach(({avatar, name, message}) => {
       const commentElement = commentItem.cloneNode(true);
-      window.console.log(commentElement);
       const commentAvatar = commentElement.querySelector('.social__picture');
       commentAvatar.src = avatar;
       commentAvatar.alt = name;
@@ -32,31 +30,34 @@ const initialPopup = () => {
     });
     socialComments.append(commentFragment);
   };
+  const comCount = bigPicture.querySelector('.comments-count');
 
   const rendersBigPicture = ({url, likes, comments, description}) => {
 
     bigPicture.querySelector('.big-picture__img img').src = url;
     bigPicture.querySelector('.likes-count').textContent = likes;
-    bigPicture.querySelector('.comments-count').textContent = comments.length;
+    comCount.textContent = comments.length;
     bigPicture.querySelector('.social__caption').textContent = description;
 
     showComments(comments);
+
   };
 
-  const onButtonLoadShowComments = (dataComments) => {
-    const commentCount = document.querySelector('.social__comment-count');
+  function onButtonLoadShowComments (dataComments) {
+    const count = 10;
     if(dataComments.length <= 5) {
-      buttonLoadComments.classList.add('hidden');
+      commentsLoader.classList.add('hidden');
     }
-    window.console.log(commentCount.textContent);
-    window.console.log(dataComments.length);
+    if(dataComments.length < 5){
+      socialCommentCount.textContent = `${count + dataComments.length%5} из ${comCount.textContent}`;
+    } else {
+      socialCommentCount.textContent = `${count} из ${comCount.textContent}`;
+    }
     showComments(dataComments.splice(0,5));
-
-  };
+  }
 
   const openBigPicture = (evt)=>{
     const picture = evt.target.closest('.picture');
-    const commentCount = document.querySelector('.social__comment-count');
     if(picture){
       const data = mockPhotos.find((photo) => +photo.id === +picture.dataset.id);
       rendersBigPicture(data);
@@ -64,16 +65,15 @@ const initialPopup = () => {
       socialCommentCount.classList.add('hidden');
       commentsLoader.classList.add('hidden');
       document.querySelector('body').classList.add('modal-open');
-
       document.addEventListener('keydown', onPopupEscKeydown);
       bigPictureCansel.addEventListener('click', closeBigPicture);
 
+
       if(data.comments.length > 5 ){
-        const dataComments = data.comments.slice();
-        buttonLoadComments.classList.remove('hidden');
-        commentCount.classList.remove('hidden');
-        showComments(dataComments.splice(0,5));
-        buttonLoadComments.addEventListener('click', () => onButtonLoadShowComments(dataComments));
+        commentsLoader.classList.remove('hidden');
+        socialCommentCount.classList.remove('hidden');
+        showComments(data.comments.splice(0,5));
+        commentsLoader.addEventListener('click', () => onButtonLoadShowComments(data.comments));
       }
     }
   };
@@ -85,7 +85,8 @@ const initialPopup = () => {
     document.querySelector('body').classList.remove('modal-open');
     document.removeEventListener('keydown', onPopupEscKeydown);
     bigPictureCansel.removeEventListener('click', closeBigPicture);
-    buttonLoadComments.removeEventListener('click', onButtonLoadShowComments);
+    commentsLoader.removeEventListener('click', onButtonLoadShowComments);
+    socialCommentCount.textContent = `${5} из ${comCount.textContent}`;
   }
 };
 
