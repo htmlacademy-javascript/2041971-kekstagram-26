@@ -44,7 +44,7 @@ const createDescription = () => {
     url: `photos/${id}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomeInInclusie(15,200),
-    comments: Array.from({length: getRandomeInInclusie(1,4)}, createComment),
+    comments: Array.from({length: getRandomeInInclusie(1,20)}, createComment),
   };
   return description;
 };
