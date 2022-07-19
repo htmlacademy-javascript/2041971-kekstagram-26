@@ -42,7 +42,6 @@ const initSlider =()=>{
     if(effect){
       imgPreview.removeAttribute('class');
       imgPreview.classList.add(`effects__preview--${effect.value}`);
-      window.console.log(evt.target);
       if(effect.value === 'chrome'){
         effectSlider.noUiSlider.updateOptions({
           range: {

@@ -1,5 +1,8 @@
+import { showAlert } from './util.js';
+import { sendData } from './api.js';
+
 const MAX_COUNT_HASHTEGS = 5;
-const  form = document.querySelector('.img-upload__form');
+const form = document.querySelector('.img-upload__form');
 const textHashtags = form.querySelector('.text__hashtags');
 
 const pristine = new window.Pristine (form, {
@@ -32,4 +35,21 @@ const validateForm = () => {
     }
   });
 };
-export {validateForm};
+
+
+const setUserFormSubmit = (onSuccess) => {
+  form.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+
+    const isValid = pristine.validate();
+    if (isValid) {
+      sendData(
+        () => onSuccess(),
+        () => showAlert('Не удалось отправить форму. Попробуйте ещё раз'),
+        new FormData(evt.target),
+      );
+    }
+  });
+};
+
+export {validateForm, setUserFormSubmit};

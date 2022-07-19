@@ -1,7 +1,6 @@
 import { isEscapeKey } from './util.js';
-import { mockPhotos } from './data.js';
 
-const initialPopup = () => {
+const initialPopup = (photos) => {
   const bigPicture = document.querySelector('.big-picture');
   const socialCommentCount = bigPicture.querySelector('.social__comment-count');
   const commentsLoader = bigPicture.querySelector('.comments-loader');
@@ -57,7 +56,6 @@ const initialPopup = () => {
   };
 
   const rendersBigPicture = ({url, likes, comments, description}) => {
-
     bigPicture.querySelector('.big-picture__img img').src = url;
     bigPicture.querySelector('.likes-count').textContent = likes;
     bigPicture.querySelector('.comments-count').textContent = comments.length;
@@ -68,7 +66,7 @@ const initialPopup = () => {
   const openBigPicture = (evt)=>{
     const picture = evt.target.closest('.picture');
     if(picture){
-      const data = mockPhotos.find((photo) => +photo.id === +picture.dataset.id);
+      const data = photos.find((photo) => +photo.id === +picture.dataset.id);
       rendersBigPicture(data);
       bigPicture.classList.remove('hidden');
       socialCommentCount.classList.add('hidden');

@@ -1,4 +1,5 @@
-const changeScale = ()=>{const scaleSmaller = document.querySelector('.scale__control--smaller');
+const changeScale = ()=>{
+  const scaleSmaller = document.querySelector('.scale__control--smaller');
   const scaleBigger = document.querySelector('.scale__control--bigger');
   const scaleValue = document.querySelector('.scale__control--value');
   const imgPreview = document.querySelector('.img-upload__preview');
