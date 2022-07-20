@@ -1,11 +1,11 @@
 import { showAlert } from './util.js';
 import { sendData } from './api.js';
+import { showMessage } from './messeges-send.js';
 
 const MAX_COUNT_HASHTEGS = 5;
 const form = document.querySelector('.img-upload__form');
 const textHashtags = form.querySelector('.text__hashtags');
 const submitButton = form.querySelector('.img-upload__submit');
-
 
 const pristine = new window.Pristine (form, {
   classTo: 'img-upload__field-wrapper',
@@ -31,12 +31,12 @@ pristine.addValidator(textHashtags, validateCountHashtags, `Максимум ${M
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
-  submitButton.textContent = 'Сохраняю...';
+  submitButton.textContent = 'Публикую...';
 };
 
 const unblockSubmitButton = () => {
   submitButton.disabled = false;
-  submitButton.textContent = 'Сохранить';
+  submitButton.textContent = 'Опубликовать';
 };
 
 const setUserFormSubmit = (onSuccess) => {
@@ -50,6 +50,7 @@ const setUserFormSubmit = (onSuccess) => {
         () => {
           onSuccess();
           unblockSubmitButton();
+          showMessage();
         },
         () => {
           showAlert('Не удалось отправить форму. Попробуйте ещё раз');
@@ -58,8 +59,7 @@ const setUserFormSubmit = (onSuccess) => {
         new FormData(evt.target),
       );
     }
-    evt.target.reset();
   });
 };
 
-export {setUserFormSubmit,form};
+export {setUserFormSubmit};

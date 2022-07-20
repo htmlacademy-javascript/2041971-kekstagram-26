@@ -5,6 +5,7 @@ import { changeScale } from './scale.js';
 import { initSlider } from './effects.js';
 import { setUserFormSubmit } from './validation.js';
 import { closeUploadFile } from './img-form.js';
+import './messeges.js';
 
 changeScale();
 initSlider();
