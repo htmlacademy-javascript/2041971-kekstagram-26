@@ -1,10 +1,18 @@
+import {showAlert} from './util.js';
+
 const getData = (onSuccess) => {
   fetch('https://26.javascript.pages.academy/kekstagram/data')
-    .then((response) => response.json())
-    .then((photos) => {
-      onSuccess(photos);
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        showAlert('Не удалось загрузить фото. Попробуйте ещё раз');
+      }
+    })
+    .then((photos) => onSuccess(photos))
+    .catch(() => {
+      showAlert('Не удалось загрузить фото. Попробуйте ещё раз');
     });
-
 };
 
 const sendData = (onSuccess, onFail, body) => {

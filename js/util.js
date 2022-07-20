@@ -36,6 +36,5 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-
 export {getRandomeInInclusie, getRandomArrayElement, isEscapeKey, showAlert};
 

@@ -28,7 +28,7 @@ const initSlider =()=>{
   });
 
   const getfilterValue = (slaiderName,unit)=>{
-    effectSlider.noUiSlider.on('update.one', ()=>{
+    effectSlider.noUiSlider.on('update', ()=>{
       effectLevelValue.value = effectSlider.noUiSlider.get();
       imgPreview.style.filter = `${slaiderName}(${effectLevelValue.value}${unit})`;
     });
@@ -94,7 +94,7 @@ const initSlider =()=>{
         });
         getfilterValue ('invert', '%');
       }
-      if(effect.id.slice(7) === 'none'){
+      if(effect.value === 'none'){
         effectSlider.classList.add('hidden');
       }
     }

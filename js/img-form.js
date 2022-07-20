@@ -7,7 +7,6 @@ const canselButton = document.querySelector('#upload-cancel');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const commentTextarea = document.querySelector('.text__description');
 
-
 const closeUploadFile = () => {
   imgUpload.classList.add('hidden');
   body.classList.remove('modal-open');
