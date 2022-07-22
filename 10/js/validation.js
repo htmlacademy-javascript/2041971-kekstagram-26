@@ -1,6 +1,7 @@
-import { showAlert } from './util.js';
 import { sendData } from './api.js';
-import { showMessage } from './messeges.js';
+import { showMessageSuccess, showMessageError } from './messeges.js';
+import { resetFilters } from './effects.js';
+import { resetScale } from './scale.js';
 
 const MAX_COUNT_HASHTEGS = 5;
 const form = document.querySelector('.img-upload__form');
@@ -50,11 +51,14 @@ const setUserFormSubmit = (onSuccess) => {
         () => {
           onSuccess();
           unblockSubmitButton();
-          showMessage();
+          showMessageSuccess();
+          form.reset();
+          resetFilters();
+          resetScale();
         },
         () => {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
           unblockSubmitButton();
+          showMessageError();
         },
         new FormData(evt.target),
       );
