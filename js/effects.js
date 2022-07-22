@@ -110,6 +110,34 @@ const initSlider =()=>{
     }
   };
 
+  switch (effect.value) {
+
+    case 'chrome':
+      effectSlider.noUiSlider.updateOptions({
+        range: {
+          min: 0,
+          max: 1,
+        },
+        start: 1,
+        step: 0.1,
+      });
+      getfilterValue ('grayscale','');
+      break;
+
+    case 'Apples':
+      console.log('Apples are $0.32 a pound.');
+      break;
+    case 'Bananas':
+      console.log('Bananas are $0.48 a pound.');
+      break;
+    case 'Cherries':
+      console.log('Cherries are $3.00 a pound.');
+      break;
+
+    default:
+      resetFilters();
+  }
+
   effectsList.addEventListener('click', addEffects);
 };
 
