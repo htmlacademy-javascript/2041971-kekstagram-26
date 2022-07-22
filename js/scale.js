@@ -1,7 +1,9 @@
-const changeScale = ()=>{const scaleSmaller = document.querySelector('.scale__control--smaller');
+const imgPreview = document.querySelector('.img-upload__preview');
+
+const changeScale = ()=>{
+  const scaleSmaller = document.querySelector('.scale__control--smaller');
   const scaleBigger = document.querySelector('.scale__control--bigger');
   const scaleValue = document.querySelector('.scale__control--value');
-  const imgPreview = document.querySelector('.img-upload__preview');
 
   let scaleCarrentValue = +scaleValue.value.substring(0, scaleValue.value.length-1);
 
@@ -24,4 +26,8 @@ const changeScale = ()=>{const scaleSmaller = document.querySelector('.scale__co
   scaleSmaller.addEventListener('click', onScallButtonScallSmoller);
   scaleBigger.addEventListener('click', onScallButtonScallBigger);
 };
-export {changeScale};
+
+const resetScale =()=>{
+  imgPreview.style.transform = 'none';
+};
+export {changeScale,resetScale};

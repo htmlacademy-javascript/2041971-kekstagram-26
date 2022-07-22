@@ -27,11 +27,11 @@ const NAMES = [
   'Андрей',
 ];
 const IDLIST = Array.from({length:25}, (v,k)=> ++k).sort();
-const COMMENDIDLIST = Array.from({length:40}, (v,k)=> ++k).sort();
+const COMMENTIDLIST = Array.from({length:40}, (v,k)=> ++k).sort();
 
 
 const createComment = () => ({
-  id: COMMENDIDLIST.shift(),
+  id: COMMENTIDLIST.shift(),
   avatar: `img/avatar-${getRandomeInInclusie(1,6)}.svg`,
   message: getRandomArrayElement(MESSAGES),
   name: getRandomArrayElement(NAMES),
