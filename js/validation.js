@@ -1,6 +1,5 @@
-import { showAlert } from './util.js';
 import { sendData } from './api.js';
-import { showMessage } from './messeges.js';
+import { showMessageSuccess, showMessageError } from './messeges.js';
 import { resetFilters } from './effects.js';
 import { resetScale } from './scale.js';
 
@@ -52,14 +51,14 @@ const setUserFormSubmit = (onSuccess) => {
         () => {
           onSuccess();
           unblockSubmitButton();
-          showMessage();
+          showMessageSuccess();
           form.reset();
           resetFilters();
           resetScale();
         },
         () => {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
           unblockSubmitButton();
+          showMessageError();
         },
         new FormData(evt.target),
       );

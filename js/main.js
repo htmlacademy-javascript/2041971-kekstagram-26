@@ -5,7 +5,10 @@ import { changeScale } from './scale.js';
 import { initSlider } from './effects.js';
 import { setUserFormSubmit } from './validation.js';
 import { closeUploadFile } from './img-form.js';
-import './messeges.js';
+import { debounce } from './util.js';
+import { setFilterClick } from './setFilters.js';
+
+const RERENDER_DELAY = 500;
 
 changeScale();
 initSlider();
@@ -13,6 +16,7 @@ initSlider();
 getData((photos)=>{
   generateThumbnails(photos);
   initialPopup(photos);
+  setFilterClick(debounce(initialPopup, RERENDER_DELAY ), photos);
 });
 
 setUserFormSubmit(closeUploadFile);
