@@ -1,4 +1,6 @@
 import { isEscapeKey } from './util.js';
+import { resetFilters } from './effects.js';
+import { resetScale } from './scale.js';
 
 const imgUpload = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -14,6 +16,8 @@ const closeUploadFile = () => {
   document.removeEventListener('keydown', onUploadFileCKeydown);
   canselButton.removeEventListener('click', closeUploadFile);
   imgFile.value = '';
+  resetFilters();
+  resetScale();
 };
 
 function onUploadFileCKeydown (evt) {

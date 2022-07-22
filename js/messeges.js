@@ -1,7 +1,7 @@
 const showMessage = ()=>{
   const messegeTemplate = document.querySelector('#success')
     .content
-    .querySelector('.success__inner');
+    .querySelector('.success');
   const body = document.querySelector('body');
 
   const messegeElement = messegeTemplate.cloneNode(true);
