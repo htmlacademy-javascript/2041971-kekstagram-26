@@ -5,18 +5,19 @@ import { changeScale } from './scale.js';
 import { initSlider } from './effects.js';
 import { setUserFormSubmit } from './validation.js';
 import { closeUploadFile } from './img-form.js';
-import { debounce } from './util.js';
-import { setFilterClick } from './setFilters.js';
+import { setFilterClick } from './set-filters.js';
+import { uploadFile } from './upload-file.js';
 
 const RERENDER_DELAY = 500;
 
 changeScale();
 initSlider();
+uploadFile();
 
 getData((photos)=>{
   generateThumbnails(photos);
   initialPopup(photos);
-  setFilterClick(debounce(initialPopup, RERENDER_DELAY ), photos);
+  setTimeout(()=>setFilterClick(photos), RERENDER_DELAY);
 });
 
 setUserFormSubmit(closeUploadFile);
