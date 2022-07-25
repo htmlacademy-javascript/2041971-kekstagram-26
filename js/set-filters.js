@@ -30,7 +30,7 @@ const setFilterClick = (photos) =>{
   const discussedButton = imgFilters.querySelector('#filter-discussed');
 
   imgFilters.classList.remove('img-filters--inactive');
-  imgFilters.addEventListener('click', renderFilters);
+  imgFilters.addEventListener('click', debounce((evt)=>renderFilters(evt), RERENDER_DELAY));
 
   function renderFilters (evt) {
     const filter = evt.target.closest('.img-filters__button');
@@ -41,44 +41,36 @@ const setFilterClick = (photos) =>{
           defaultButton.classList.remove('img-filters__button--active');
           randomButton.classList.add('img-filters__button--active');
           discussedButton.classList.remove('img-filters__button--active');
-          debounce(()=>{
-            removePhoto();
-            generateThumbnails(getRandomPhotos(photos));
-            initialPopup(getRandomPhotos(photos));
-          }, RERENDER_DELAY)();
+          removePhoto();
+          generateThumbnails(getRandomPhotos(photos));
+          initialPopup(getRandomPhotos(photos));
           break;
 
         case 'filter-discussed':
           defaultButton.classList.remove('img-filters__button--active');
           randomButton.classList.remove('img-filters__button--active');
           discussedButton.classList.add('img-filters__button--active');
-          debounce(()=>{
-            removePhoto();
-            generateThumbnails(getDiscussedPhotos(photos));
-            initialPopup(getDiscussedPhotos(photos));
-          }, RERENDER_DELAY)();
+          removePhoto();
+          generateThumbnails(getDiscussedPhotos(photos));
+          initialPopup(getDiscussedPhotos(photos));
           break;
 
         case 'filter-default':
           defaultButton.classList.add('img-filters__button--active');
           randomButton.classList.remove('img-filters__button--active');
           discussedButton.classList.remove('img-filters__button--active');
-          debounce(()=>{
-            removePhoto();
-            generateThumbnails(photos);
-            initialPopup(photos);
-          }, RERENDER_DELAY)();
+          removePhoto();
+          generateThumbnails(photos);
+          initialPopup(photos);
           break;
 
         default:
           defaultButton.classList.add('img-filters__button--active');
           randomButton.classList.remove('img-filters__button--active');
           discussedButton.classList.remove('img-filters__button--active');
-          debounce(()=>{
-            removePhoto();
-            generateThumbnails(photos);
-            initialPopup(photos);
-          }, RERENDER_DELAY)();
+          removePhoto();
+          generateThumbnails(photos);
+          initialPopup(photos);
       }
     }}
 };

@@ -8,8 +8,6 @@ import { closeUploadFile } from './img-form.js';
 import { setFilterClick } from './set-filters.js';
 import { uploadFile } from './upload-file.js';
 
-const RERENDER_DELAY = 500;
-
 changeScale();
 initSlider();
 uploadFile();
@@ -17,7 +15,7 @@ uploadFile();
 getData((photos)=>{
   generateThumbnails(photos);
   initialPopup(photos);
-  setTimeout(()=>setFilterClick(photos), RERENDER_DELAY);
+  setFilterClick(photos);
 });
 
 setUserFormSubmit(closeUploadFile);
