@@ -68,6 +68,7 @@ const initialPopup = (photos) => {
     if(picture){
       const data = photos.find((photo) => +photo.id === +picture.dataset.id);
       rendersBigPicture(data);
+      console.log(data);
       bigPicture.classList.remove('hidden');
       socialCommentCount.classList.add('hidden');
       commentsLoader.classList.add('hidden');

@@ -1,25 +1,28 @@
 const imgPreview = document.querySelector('.img-upload__preview');
+const scaleValue = document.querySelector('.scale__control--value');
+const MAX_VALUE = 100;
+let scaleCarrentValue = +scaleValue.value.substring(0, scaleValue.value.length-1);
 
 const changeScale = ()=>{
+  const MIN_VALUE = 25;
+  const SCALE_STEP = 25;
+  const PERSENT_COEFFICIENT = 0.01;
   const scaleSmaller = document.querySelector('.scale__control--smaller');
   const scaleBigger = document.querySelector('.scale__control--bigger');
-  const scaleValue = document.querySelector('.scale__control--value');
-
-  let scaleCarrentValue = +scaleValue.value.substring(0, scaleValue.value.length-1);
 
   const onScallButtonScallSmoller=()=>{
-    if(scaleCarrentValue >=50 && scaleCarrentValue<=100){
-      scaleCarrentValue -= 25;
+    if(scaleCarrentValue > MIN_VALUE && scaleCarrentValue <= MAX_VALUE){
+      scaleCarrentValue -= SCALE_STEP;
       scaleValue.value = `${scaleCarrentValue}%`;
-      imgPreview.style.transform = `scale(${+scaleCarrentValue/100})`;
+      imgPreview.style.transform = `scale(${+scaleCarrentValue*PERSENT_COEFFICIENT})`;
     }
   };
 
   const onScallButtonScallBigger=()=>{
-    if(scaleCarrentValue<=75 && scaleCarrentValue>=25){
-      scaleCarrentValue += 25;
+    if(scaleCarrentValue < MAX_VALUE && scaleCarrentValue >= MIN_VALUE){
+      scaleCarrentValue += SCALE_STEP;
       scaleValue.value = `${scaleCarrentValue}%`;
-      imgPreview.style.transform = `scale(${+scaleCarrentValue/100})`;
+      imgPreview.style.transform = `scale(${+scaleCarrentValue*PERSENT_COEFFICIENT})`;
     }
   };
 
@@ -28,6 +31,8 @@ const changeScale = ()=>{
 };
 
 const resetScale =()=>{
+  scaleCarrentValue = MAX_VALUE;
+  scaleValue.value = `${MAX_VALUE}%`;
   imgPreview.style.transform = 'none';
 };
-export {changeScale,resetScale};
+export {changeScale, resetScale};

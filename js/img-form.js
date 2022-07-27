@@ -1,6 +1,8 @@
 import { isEscapeKey } from './util.js';
 import { resetFilters } from './effects.js';
 import { resetScale } from './scale.js';
+import { pristine } from './validation.js';
+
 
 const imgUpload = document.querySelector('.img-upload__overlay');
 const body = document.querySelector('body');
@@ -8,7 +10,6 @@ const imgFile = document.querySelector('#upload-file');
 const canselButton = document.querySelector('#upload-cancel');
 const hashtagsInput = document.querySelector('.text__hashtags');
 const commentTextarea = document.querySelector('.text__description');
-
 
 const closeUploadFile = () => {
   imgUpload.classList.add('hidden');
@@ -18,6 +19,7 @@ const closeUploadFile = () => {
   imgFile.value = '';
   resetFilters();
   resetScale();
+  pristine.reset();
 };
 
 function onUploadFileCKeydown (evt) {

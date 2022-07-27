@@ -27,8 +27,15 @@ const validateCountHashtags = (value) =>{
   return hashtegsElements.length <= MAX_COUNT_HASHTEGS;
 };
 
+const validateHeshtagsUnique = (value) =>{
+  const hashtegsElements = getArrayHashtags(value);
+  const set = new Set(hashtegsElements);
+  return (set.size === hashtegsElements.length);
+};
+
 pristine.addValidator(textHashtags, validateHeshtags, 'Неверный формат хэш-тега');
 pristine.addValidator(textHashtags, validateCountHashtags, `Максимум ${MAX_COUNT_HASHTEGS} хэш-тегов`);
+pristine.addValidator(textHashtags, validateHeshtagsUnique, 'Одинаковые хэш-теги');
 
 const blockSubmitButton = () => {
   submitButton.disabled = true;
@@ -66,4 +73,4 @@ const setUserFormSubmit = (onSuccess) => {
   });
 };
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, pristine};

@@ -44,6 +44,7 @@ const setFilterClick = (photos) =>{
           removePhoto();
           generateThumbnails(getRandomPhotos(photos));
           initialPopup(getRandomPhotos(photos));
+          console.log(getRandomPhotos(photos));
           break;
 
         case 'filter-discussed':
