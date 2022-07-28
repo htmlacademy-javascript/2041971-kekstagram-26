@@ -1,23 +1,22 @@
-import { getData } from './api.js';
-import { generateThumbnails } from './thumbnails.js';
-import { initialPopup } from './popup.js';
-import { changeScale } from './scale.js';
-import { initSlider } from './effects.js';
-import { setUserFormSubmit } from './validation.js';
-import { closeUploadFile } from './img-form.js';
-import { setFilterClick } from './set-filters.js';
-import { uploadFile } from './upload-file.js';
-
-const RERENDER_DELAY = 500;
+import {getData} from './api.js';
+import {generateThumbnails} from './thumbnails.js';
+import {initiatePopup, setPhotoDataForPopup} from './popup.js';
+import {changeScale} from './scale.js';
+import {initiateSlider} from './effects.js';
+import {setUserFormSubmit} from './validation.js';
+import {onCancelButtonClick} from './img-form.js';
+import {setFilterClick} from './set-filters.js';
+import {uploadFile} from './upload-file.js';
 
 changeScale();
-initSlider();
+initiateSlider();
 uploadFile();
 
-getData((photos)=>{
+getData((photos) => {
   generateThumbnails(photos);
-  initialPopup(photos);
-  setTimeout(()=>setFilterClick(photos), RERENDER_DELAY);
+  setPhotoDataForPopup(photos);
+  initiatePopup();
+  setFilterClick(photos);
 });
 
-setUserFormSubmit(closeUploadFile);
+setUserFormSubmit(onCancelButtonClick);
