@@ -1,4 +1,4 @@
-const generateThumbnails = (pictures) =>{
+const generateThumbnails = (pictures) => {
   const similarListElement = document.querySelector('.pictures');
   const pictureTemplate = document.querySelector('#picture')
     .content
@@ -6,7 +6,7 @@ const generateThumbnails = (pictures) =>{
 
   const pictureFragment = document.createDocumentFragment();
 
-  pictures.forEach(({likes, comments, url,id}) => {
+  pictures.forEach(({likes, comments, url, id}) => {
     const pictureElement = pictureTemplate.cloneNode(true);
 
     pictureElement.querySelector('.picture__likes').textContent = likes;
@@ -20,4 +20,3 @@ const generateThumbnails = (pictures) =>{
 };
 
 export {generateThumbnails};
-

@@ -26,30 +26,30 @@ noUiSlider.create(effectSlider, {
   },
 });
 
-const getfilterValue = (slaiderName,unit)=>{
-  if (slaiderName === 'none') {
+const getFilterValue = (sliderName, unit) => {
+  if (sliderName === 'none') {
     imgPreview.style.filter = 'none';
     return;
   }
 
-  effectSlider.noUiSlider.on('update', ()=>{
+  effectSlider.noUiSlider.on('update', () => {
     effectLevelValue.value = effectSlider.noUiSlider.get();
-    imgPreview.style.filter = `${slaiderName}(${effectLevelValue.value}${unit})`;
+    imgPreview.style.filter = `${sliderName}(${effectLevelValue.value}${unit})`;
   });
 };
 
-const resetFilters = ()=>{
+const resetFilters = () => {
   effectSlider.classList.add('hidden');
-  getfilterValue ('none');
+  getFilterValue ('none');
 };
 
-const initSlider =()=>{
-  const addEffects = (evt) => {
+const initiateSlider = () => {
+  const onEffectsListClick = (evt) => {
     const effect = evt.target.closest('.effects__radio');
     effectSlider.classList.remove('hidden');
     effectSlider.noUiSlider.off();
 
-    if(effect){
+    if (effect) {
       imgPreview.removeAttribute('class');
       imgPreview.classList.add(`effects__preview--${effect.value}`);
       switch (effect.value) {
@@ -63,7 +63,7 @@ const initSlider =()=>{
             start: 1,
             step: 0.1,
           });
-          getfilterValue ('grayscale','');
+          getFilterValue ('grayscale', '');
           break;
 
         case 'sepia':
@@ -76,7 +76,7 @@ const initSlider =()=>{
             start: 1,
             step: 0.1,
           });
-          getfilterValue ('sepia','');
+          getFilterValue ('sepia', '');
           break;
 
         case 'phobos':
@@ -88,7 +88,7 @@ const initSlider =()=>{
             start: 3,
             step: 0.1,
           });
-          getfilterValue ('blur', 'px');
+          getFilterValue ('blur', 'px');
           break;
 
         case 'heat':
@@ -100,7 +100,7 @@ const initSlider =()=>{
             start: 3,
             step: 0.1,
           });
-          getfilterValue ('brightness', '');
+          getFilterValue ('brightness', '');
           break;
 
         case 'marvin':
@@ -112,7 +112,7 @@ const initSlider =()=>{
             start: 100,
             step: 1,
           });
-          getfilterValue ('invert', '%');
+          getFilterValue ('invert', '%');
           break;
 
         default:
@@ -121,8 +121,7 @@ const initSlider =()=>{
     }
   };
 
-  effectsList.addEventListener('click', addEffects);
+  effectsList.addEventListener('click', onEffectsListClick);
 };
 
-
-export {initSlider, resetFilters};
+export {initiateSlider, resetFilters};
