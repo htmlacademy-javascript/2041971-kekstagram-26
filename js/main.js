@@ -1,20 +1,20 @@
-import { getData } from './api.js';
-import { generateThumbnails } from './thumbnails.js';
-import { initialPopup } from './popup.js';
-import { changeScale } from './scale.js';
-import { initSlider } from './effects.js';
-import { setUserFormSubmit } from './validation.js';
-import { closeUploadFile } from './img-form.js';
-import { setFilterClick } from './set-filters.js';
-import { uploadFile } from './upload-file.js';
+import {getData} from './api.js';
+import {generateThumbnails} from './thumbnails.js';
+import {initiatePopup} from './popup.js';
+import {changeScale} from './scale.js';
+import {initiateSlider} from './effects.js';
+import {setUserFormSubmit} from './validation.js';
+import {closeUploadFile} from './img-form.js';
+import {setFilterClick} from './set-filters.js';
+import {uploadFile} from './upload-file.js';
 
 changeScale();
-initSlider();
+initiateSlider();
 uploadFile();
 
-getData((photos)=>{
+getData((photos) => {
   generateThumbnails(photos);
-  initialPopup(photos);
+  initiatePopup(photos);
   setFilterClick(photos);
 });
 

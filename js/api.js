@@ -1,4 +1,5 @@
 import {showAlert} from './util.js';
+
 const DATA_GET = 'https://26.javascript.pages.academy/kekstagram/data';
 const DATA_SEND = 'https://26.javascript.pages.academy/kekstagram';
 

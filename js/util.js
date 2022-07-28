@@ -9,10 +9,6 @@ const getRandomeInInclusie = (min, max) => {
   return new Error ('Аргументы не соответствуют задаче');
 };
 
-const checkMaxStrLength = (str, maxLenght) => typeof str !== 'string' ? new Error ('Не корректный ввод') : str.length <= maxLenght;
-checkMaxStrLength('larisa', 10);
-
-const getRandomArrayElement = (elements) => elements[getRandomeInInclusie(0, elements.length - 1)];
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showAlert = (message) => {
@@ -44,5 +40,5 @@ const debounce = (callback, timeoutDelay) => {
   };
 };
 
-export {getRandomeInInclusie, getRandomArrayElement, isEscapeKey, showAlert, debounce};
+export {getRandomeInInclusie, isEscapeKey, showAlert, debounce};
 

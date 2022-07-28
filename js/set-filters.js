@@ -1,40 +1,42 @@
-import { getRandomeInInclusie, debounce } from './util.js';
-import { generateThumbnails } from './thumbnails.js';
-import { initialPopup } from './popup.js';
+import {getRandomeInInclusie, debounce} from './util.js';
+import {generateThumbnails} from './thumbnails.js';
+import {initiatePopup} from './popup.js';
 
 const RERENDER_DELAY = 500;
-const removePhoto = ()=>{
+const RANDOM_PHOTO_MAX_COUNT = 10;
+
+const removePhoto = () => {
   const photos = document.querySelectorAll('.picture');
-  photos.forEach((photo)=>photo.remove());
+  photos.forEach((photo) => photo.remove());
 };
 
-const comparePhotoByComments = (firstPhoto, secondPhoto) =>secondPhoto.comments.length - firstPhoto.comments.length;
+const comparePhotoByComments = (firstPhoto, secondPhoto) => secondPhoto.comments.length - firstPhoto.comments.length;
 const getDiscussedPhotos = (photos) => photos.slice().sort(comparePhotoByComments);
 
 const shufflePhoto = (photos) => {
   const photosCopy = photos.slice();
-  const newPhotosArray = [];
-  while (newPhotosArray.length <=10){
-    const photo = photosCopy.splice(getRandomeInInclusie(0,photosCopy.length-1), 1);
-    newPhotosArray.push(photo[0]);
+  const newPhotosCopy = [];
+  while (newPhotosCopy.length <= RANDOM_PHOTO_MAX_COUNT) {
+    const newPhotos = photosCopy.splice(getRandomeInInclusie(0, photosCopy.length-1), 1);
+    newPhotosCopy.push(newPhotos[0]);
   }
-  return newPhotosArray;
+  return newPhotosCopy;
 };
 
 const getRandomPhotos = (photos) => shufflePhoto(photos).slice(0,10);
 
-const setFilterClick = (photos) =>{
+const setFilterClick = (photos) => {
   const imgFilters = document.querySelector('.img-filters');
   const defaultButton = imgFilters.querySelector('#filter-default');
   const randomButton = imgFilters.querySelector('#filter-random');
   const discussedButton = imgFilters.querySelector('#filter-discussed');
 
   imgFilters.classList.remove('img-filters--inactive');
-  imgFilters.addEventListener('click', debounce((evt)=>renderFilters(evt), RERENDER_DELAY));
+  imgFilters.addEventListener('click', debounce((evt) => renderFilters(evt), RERENDER_DELAY));
 
   function renderFilters (evt) {
     const filter = evt.target.closest('.img-filters__button');
-    if(filter){
+    if (filter) {
       switch (filter.id) {
 
         case 'filter-random':
@@ -43,8 +45,7 @@ const setFilterClick = (photos) =>{
           discussedButton.classList.remove('img-filters__button--active');
           removePhoto();
           generateThumbnails(getRandomPhotos(photos));
-          initialPopup(getRandomPhotos(photos));
-          console.log(getRandomPhotos(photos));
+          initiatePopup(getRandomPhotos(photos));
           break;
 
         case 'filter-discussed':
@@ -53,7 +54,7 @@ const setFilterClick = (photos) =>{
           discussedButton.classList.add('img-filters__button--active');
           removePhoto();
           generateThumbnails(getDiscussedPhotos(photos));
-          initialPopup(getDiscussedPhotos(photos));
+          initiatePopup(getDiscussedPhotos(photos));
           break;
 
         case 'filter-default':
@@ -62,7 +63,7 @@ const setFilterClick = (photos) =>{
           discussedButton.classList.remove('img-filters__button--active');
           removePhoto();
           generateThumbnails(photos);
-          initialPopup(photos);
+          initiatePopup(photos);
           break;
 
         default:
@@ -71,8 +72,9 @@ const setFilterClick = (photos) =>{
           discussedButton.classList.remove('img-filters__button--active');
           removePhoto();
           generateThumbnails(photos);
-          initialPopup(photos);
+          initiatePopup(photos);
       }
     }}
 };
+
 export {setFilterClick};
